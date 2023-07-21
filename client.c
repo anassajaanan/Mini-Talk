@@ -5,42 +5,67 @@
 #include <time.h>
 
 
-void	send_data(int server_pid, char c)
+void	send_data(int server_pid, char data)
 {
-	int result1 = kill(server_pid, SIGUSR1);
-	if (result1 == 0)
+	for (int i = 0; i < 8; i++)
 	{
-		printf("Start Transmission\n");
+		int mask = 1 << i;
+		if ((data & mask) == 0)
+		{
+			kill(server_pid, SIGUSR2);
+		}
+		else
+		{
+			kill(server_pid, SIGUSR1);
+		}
+		usleep(100);
 	}
-	else
-	{
-		printf("Error\n");
-	}
+}
 
-	int signal_num = (int)c;
-	for (int i = 0; i < signal_num; i++)
+int	is_numeric(const char *str)
+{
+	if (*str && (*str == '+'))
+		str++;
+	if (*str == '\0')
+		return (0);
+	while (*str)
 	{
-		if (kill(server_pid, SIGUSR2) == -1) {
-            perror("Error sending data signal");
-            exit(1);
-        }
-		usleep(1000);
+		if (*str < '0' || *str > '9')
+			return (0);
+		str++;
 	}
-
-	result1 = kill(server_pid, SIGUSR1);
-	if (result1 == 0)
-	{
-		printf("Start Transmission\n");
-	}
+	return (1);
 }
 
 int main(int argc, char **argv)
 {
-	if (argc == 3)
+	int		i;
+	char	*data;
+	int		server_pid;
+	
+	if (argc < 3)
 	{
-		int pid = atoi(argv[1]);
-		char data = argv[2][0];
-
-		send_data(pid, data);
+		printf("Usage: %s <server_pid> <message>\n", argv[0]);
+		return (1);
 	}
+	if (!is_numeric(argv[1]))
+	{
+		printf("Invalid server PID: %s\n", argv[1]);
+		return (1);
+	}
+	server_pid = atoi(argv[1]);
+	i = 2;
+	while (i < argc)
+	{
+		data = argv[i];
+		while (*data)
+		{
+			send_data(server_pid, *data);
+			data++;
+		}
+		send_data(server_pid, ' ');
+		i++;
+	}
+	send_data(server_pid, '\n');
+	return (0);
 }
