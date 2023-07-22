@@ -6,7 +6,7 @@
 /*   By: aajaanan <aajaanan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:48:55 by aajaanan          #+#    #+#             */
-/*   Updated: 2023/07/22 09:27:31 by aajaanan         ###   ########.fr       */
+/*   Updated: 2023/07/22 10:00:15 by aajaanan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	process_completed_byte(int client_pid)
 	if (g_state.data_byte == '\0')
 		send_acknowledgment(client_pid);
 	ft_putchar_fd((char)g_state.data_byte, 1);
-	fflush(stdout);
 	g_state.bits_count = 0;
 	g_state.data_byte = 0;
 }

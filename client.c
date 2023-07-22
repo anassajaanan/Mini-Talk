@@ -6,7 +6,7 @@
 /*   By: aajaanan <aajaanan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:49:03 by aajaanan          #+#    #+#             */
-/*   Updated: 2023/07/22 09:40:29 by aajaanan         ###   ########.fr       */
+/*   Updated: 2023/07/22 10:05:52 by aajaanan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,14 @@ int	main(int argc, char **argv)
 	if (argc < 3)
 	{
 		ft_putstr_fd("Usage: ./client <server_pid> <message>\n", 2);
-		return (1);
+		exit(1);
 	}
 	if (!is_numeric(argv[1]))
 	{
 		ft_putstr_fd("Invalid server PID: ", 2);
 		ft_putstr_fd(argv[1], 2);
-		return (1);
+		ft_putchar_fd('\n', 2);
+		exit(1);
 	}
 	sa.sa_sigaction = signal_handler;
 	sigaction(SIGUSR1, &sa, NULL);
