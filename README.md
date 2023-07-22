@@ -21,18 +21,18 @@ MiniTalk is a client-server communication program developed for 42 curriculum. T
 
   **Server**
   
-    - Start the server by running the **`./server`** executable.
-    - The server will print its PID on startup.
+   - Start the server by running the **`./server`** executable.
+   - The server will print its PID on startup.
   
   **Client**
   
-    - To send a message, run the **`./client`** executable followed by the server PID and the message you want to send. For example:
-        
-        ```bash
-        
-        ./client [SERVER_PID] Hello, this is a test message!
-        
-        ```
+   - To send a message, run the **`./client`** executable followed by the server PID and the message you want to send. For example:
+       
+       ```bash
+       
+       ./client [SERVER_PID] Hello, this is a test message!
+       
+       ```
       
 
 ### **Notes**
