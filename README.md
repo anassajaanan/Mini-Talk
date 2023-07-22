@@ -4,6 +4,43 @@
 
 MiniTalk is a client-server communication program developed for 42 curriculum. The project focuses on inter-process communication using UNIX signals **`SIGUSR1`** and **`SIGUSR2`**. The server and client applications exchange messages, allowing the server to receive and display the transmitted messages from clients.
 
+### **Features**
+
+- Communication using UNIX signals (SIGUSR1 and SIGUSR2).
+- Ability to send messages with ASCII characters and receive them on the server.
+- Quick message display on the server side.
+- Support for Unicode characters.
+
+### **Getting Started**
+
+1. Clone the repository to your local machine.
+2. Navigate to the repository's directory.
+3. Run **`make`** to compile the client and server executables.
+
+### **Usage**
+
+  **Server**
+  
+    - Start the server by running the **`./server`** executable.
+    - The server will print its PID on startup.
+  
+  **Client**
+  
+    - To send a message, run the **`./client`** executable followed by the server PID and the message you want to send. For example:
+        
+        ```bash
+        
+        ./client [SERVER_PID] Hello, this is a test message!
+        
+        ```
+      
+
+### **Notes**
+
+- The communication between the client and server is done using bitwise operations to send individual bits of the message as UNIX signals.
+- The server acknowledges every message received by sending back a signal to the client.
+- The program handles errors thoroughly to ensure it does not quit unexpectedly and avoids memory leaks.
+
 ## **Server Implementation**
 
 The server implementation can be found in the **`server.c`** file. It starts by displaying its own PID and sets up the signal handlers using **`sigaction`**. The server maintains a global state using the **`t_global_state`** structure defined in **`minitalk.h`**, which consists of **`data_byte`** and **`bits_count`**. The server uses these variables to reconstruct the received message and prints it when a byte is completed.
