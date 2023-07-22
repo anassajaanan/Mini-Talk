@@ -6,7 +6,7 @@
 /*   By: aajaanan <aajaanan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:49:03 by aajaanan          #+#    #+#             */
-/*   Updated: 2023/07/22 17:36:39 by aajaanan         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:47:07 by aajaanan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,11 @@ int	main(int argc, char **argv)
 	sa.sa_sigaction = signal_handler;
 	sigaction(SIGUSR1, &sa, NULL);
 	server_pid = ft_atoi(argv[1]);
+	if (server_pid == 0)
+	{
+		ft_putstr_fd("Invalid server PID\n", 2);
+		exit(1);
+	}
 	send_message_to_server(argc, argv, server_pid);
 	return (0);
 }
