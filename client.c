@@ -6,7 +6,7 @@
 /*   By: aajaanan <aajaanan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:49:03 by aajaanan          #+#    #+#             */
-/*   Updated: 2023/07/22 18:45:59 by aajaanan         ###   ########.fr       */
+/*   Updated: 2023/07/22 19:00:55 by aajaanan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	send_character_signal(int server_pid, char data)
 		{
 			kill(server_pid, SIGUSR1);
 		}
-		usleep(300);
+		usleep(200);
 		i++;
 	}
 }
