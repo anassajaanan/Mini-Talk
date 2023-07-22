@@ -6,7 +6,7 @@
 /*   By: aajaanan <aajaanan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/22 07:34:56 by aajaanan          #+#    #+#             */
-/*   Updated: 2023/07/22 08:15:54 by aajaanan         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:39:13 by aajaanan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,33 @@ int	is_numeric(const char *str)
 		str++;
 	}
 	return (1);
+}
+
+int	ft_atoi(const char *str)
+{
+	int		i;
+	int		sign;
+	size_t	num;
+
+	i = 0;
+	sign = 1;
+	num = 0;
+	while (str[i] && ((str[i] >= 9 && str[i] <= 13) || str[i] == 32))
+		i++;
+	if (str[i] && (str[i] == '+' || str[i] == '-'))
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
+	{
+		num = (num * 10) + (str[i] - '0');
+		i++;
+	}
+	if (sign == -1 && num >= LONG_MAX)
+		return (0);
+	else if (sign == 1 && num >= LONG_MAX)
+		return (-1);
+	return (num * sign);
 }

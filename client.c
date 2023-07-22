@@ -6,7 +6,7 @@
 /*   By: aajaanan <aajaanan@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 19:49:03 by aajaanan          #+#    #+#             */
-/*   Updated: 2023/07/22 10:05:52 by aajaanan         ###   ########.fr       */
+/*   Updated: 2023/07/22 17:36:39 by aajaanan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	send_character_signal(int server_pid, char data)
 		{
 			kill(server_pid, SIGUSR1);
 		}
-		usleep(100);
+		usleep(500);
 		i++;
 	}
 }
@@ -86,7 +86,7 @@ int	main(int argc, char **argv)
 	}
 	sa.sa_sigaction = signal_handler;
 	sigaction(SIGUSR1, &sa, NULL);
-	server_pid = atoi(argv[1]);
+	server_pid = ft_atoi(argv[1]);
 	send_message_to_server(argc, argv, server_pid);
 	return (0);
 }
