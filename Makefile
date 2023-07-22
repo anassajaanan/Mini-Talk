@@ -1,3 +1,5 @@
+NAME = minitalk
+
 SERVER = server
 
 CLIENT = client
@@ -23,6 +25,8 @@ $(SERVER): $(OBJS_SERVER)
 
 $(CLIENT): $(OBJS_CLIENT)
 	$(CC) $(CFLAGS) -o $(CLIENT) $(OBJS_CLIENT)
+
+$(NAME): all
 
 bonus: all
 
